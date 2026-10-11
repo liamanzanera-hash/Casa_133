@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08090d">
+<meta name="description" content="CASA_13: escape room de terror tecnológico y digitalización.">
+<title>CASA_13 — No deberías haber entrado</title>
+<style>
+:root{--bg:#08090d;--panel:rgba(15,17,23,.88);--line:rgba(210,220,235,.16);--text:#f3f2f5;--muted:#a8aab4;--red:#e04451;--red2:#ff6c73;--green:#8ce2b1;--amber:#e9bc76}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{overflow-x:hidden;background-image:radial-gradient(ellipse at 50% 12%,rgba(89,32,42,.24),transparent 45%),linear-gradient(180deg,#101119 0%,#08090d 70%)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;z-index:10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");mix-blend-mode:screen}
+.hidden{display:none!important}.wrap{max-width:980px;margin:auto;padding:18px 16px 38px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 18px;border-bottom:1px solid var(--line);margin-bottom:18px}.brand{font-weight:900;letter-spacing:.18em;font-size:1rem}.brand span{color:var(--red2)}.sys{font:700 .68rem ui-monospace,monospace;letter-spacing:.12em;color:#b2a9b5;text-align:right}.status{display:inline-flex;align-items:center;gap:7px}.dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);animation:pulse 1.7s infinite}@keyframes pulse{50%{opacity:.35}}
+.hero{position:relative;min-height:340px;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;align-items:end;background:linear-gradient(0deg,rgba(5,6,9,.98) 0%,rgba(5,6,9,.65) 42%,rgba(5,6,9,.08) 100%),radial-gradient(ellipse at 50% 28%,rgba(149,70,70,.26),transparent 34%),linear-gradient(90deg,#11131b 0%,#24212a 45%,#0b0c12 100%)}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 48%,rgba(0,0,0,.55) 49%,transparent 50%),repeating-linear-gradient(90deg,transparent 0 11%,rgba(255,255,255,.025) 11.2% 11.5%),linear-gradient(180deg,transparent 45%,rgba(0,0,0,.7));clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
+.hero:after{content:"";position:absolute;left:40%;top:0;width:20%;height:85%;border:1px solid rgba(255,255,255,.1);background:linear-gradient(90deg,rgba(0,0,0,.3),rgba(140,130,145,.08),rgba(0,0,0,.55));box-shadow:0 0 70px rgba(214,47,62,.08);transform:perspective(300px) rotateY(-2deg)}
+.hero-content{position:relative;z-index:1;padding:clamp(22px,5vw,46px);max-width:760px}.eyebrow{font:700 .7rem ui-monospace,monospace;color:var(--red2);letter-spacing:.2em;text-transform:uppercase}.hero h1{font-size:clamp(2.5rem,9vw,5.6rem);line-height:.9;letter-spacing:-.07em;margin:14px 0 18px;font-weight:950;text-shadow:0 4px 28px #000}.hero h1 em{font-style:normal;color:var(--red2)}.hero p{max-width:600px;color:#d0cdd5;line-height:1.65;font-size:1rem}
+.btn{appearance:none;border:1px solid rgba(255,255,255,.2);background:#1b1c24;color:var(--text);border-radius:10px;padding:14px 17px;font-size:.93rem;font-weight:800;letter-spacing:.045em;cursor:pointer;transition:transform .15s,border-color .15s,background .15s}.btn:hover{border-color:var(--red2);transform:translateY(-1px)}.btn.primary{background:var(--red);border-color:var(--red);color:white}.btn:focus-visible,.answer:focus-visible{outline:3px solid #fff;outline-offset:3px}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.note{font-size:.82rem;color:var(--muted);line-height:1.55}.panel{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:clamp(18px,4vw,30px);backdrop-filter:blur(8px);box-shadow:0 18px 70px rgba(0,0,0,.2)}
+.grid{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}.kicker{font:700 .7rem ui-monospace,monospace;color:var(--red2);letter-spacing:.15em;text-transform:uppercase}.roomtitle{font-size:clamp(1.65rem,5vw,2.5rem);letter-spacing:-.045em;margin:8px 0 12px}.story{color:#d0ced5;line-height:1.7;white-space:pre-line}.timer{font:900 clamp(1.35rem,4vw,2rem) ui-monospace,monospace;color:var(--red2);border:1px solid rgba(224,68,81,.35);background:rgba(224,68,81,.08);padding:10px 12px;border-radius:10px;min-width:104px;text-align:center}.timer.warn{animation:pulse .7s infinite}.stats{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.chip{font:700 .72rem ui-monospace,monospace;border:1px solid var(--line);padding:8px 10px;border-radius:999px;color:#d3d0d8}.progress{height:5px;background:#292a32;border-radius:10px;overflow:hidden;margin:16px 0 24px}.progress>div{height:100%;background:linear-gradient(90deg,var(--red),#ff8c91);width:0%;transition:width .35s}
+.question{font-size:1.1rem;line-height:1.55;font-weight:750;margin:18px 0}.answers{display:grid;gap:10px}.answer{display:flex;align-items:center;gap:13px;width:100%;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:12px;padding:14px;color:var(--text);font-size:.95rem;line-height:1.4;cursor:pointer}.answer:hover{border-color:rgba(255,108,115,.65);background:rgba(224,68,81,.08)}.letter{flex:0 0 32px;height:32px;border:1px solid #50515b;border-radius:8px;display:grid;place-items:center;font:800 .8rem ui-monospace,monospace;color:#c9c5cf}.feedback{margin-top:16px;border-radius:10px;padding:13px 15px;line-height:1.55}.feedback.good{border:1px solid rgba(140,226,177,.3);background:rgba(60,140,95,.12);color:var(--green)}.feedback.bad{border:1px solid rgba(255,108,115,.3);background:rgba(224,68,81,.1);color:#ffb5ba}.feedback .small{display:block;font-size:.87rem;color:#e0dbe3;margin-top:4px}.nextrow{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:18px}.footer{display:flex;justify-content:space-between;gap:12px;color:#6e707c;font: .66rem ui-monospace,monospace;letter-spacing:.09em;margin-top:18px}.warning{color:var(--amber)}
+.terminal{background:#030405;border:1px solid #3b303d;border-radius:12px;padding:18px;font: .86rem/1.8 ui-monospace,monospace;color:#d6c9d9;white-space:pre-line}.terminal strong{color:var(--red2)}.ending h2{font-size:clamp(2rem,7vw,4rem);letter-spacing:-.06em;margin:8px 0 14px}.ending .finalline{color:#ff9ba3;font-size:1.08rem;line-height:1.7}.flash{animation:flash .24s steps(2,end) 3}@keyframes flash{0%,100%{filter:none}50%{filter:brightness(2.8) sepia(.4) hue-rotate(300deg)}}.shake{animation:shake .32s linear 2}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}.scanline{position:relative}.scanline:after{content:"";pointer-events:none;position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 4px,rgba(255,255,255,.025) 5px 6px);opacity:.45}
+@media(max-width:600px){.wrap{padding:12px 11px 28px}.hero{min-height:390px}.topbar{align-items:flex-start}.sys{font-size:.59rem}.grid{grid-template-columns:1fr auto;gap:8px}.timer{min-width:88px;padding:8px 6px}.panel{padding:17px}.footer{font-size:.58rem}.answer{padding:12px}.hero-content{padding:24px 20px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">CASA<span>_13</span></div>
+    <div class="sys"><span class="status"><i class="dot"></i> SISTEMA ACTIVO</span><br><span id="clockLabel">23:47:00</span> · PROTOCOLO 013</div>
+  </header>
+
+  <main id="intro">
+    <section class="hero scanline">
+      <div class="hero-content">
+        <div class="eyebrow">Expediente 013 · Simulación de supervivencia</div>
+        <h1>NO DEBERÍAS<br>HABER <em>ENTRADO.</em></h1>
+        <p>Son las 23:47. Una tormenta os obliga a refugiaros en una mansión aparentemente abandonada. La puerta se cierra. Las luces se encienden solas.</p>
+        <p><strong>«Bienvenidos a casa. He estado esperando vuestra llegada».</strong></p>
+        <button class="btn primary" id="startBtn">INICIAR PROTOCOLO ↗</button>
+        <p class="note">Ocho pruebas. Diez minutos. Cada error tiene consecuencias.</p>
+      </div>
+    </section>
+    <div class="stats"><span class="chip">MODO INDIVIDUAL</span><span class="chip">8 HABITACIONES</span><span class="chip">10:00 MIN</span><span class="chip">SIN INSTALAR NADA</span></div>
+  </main>
+
+  <main id="game" class="hidden">
+    <section class="panel scanline" id="gamePanel">
+      <div class="grid">
+        <div><div class="kicker" id="roomKicker">HABITACIÓN 01 / 08</div><h2 class="roomtitle" id="roomTitle"></h2></div>
+        <div class="timer" id="timer" aria-live="off">10:00</div>
+      </div>
+      <div class="progress" aria-label="Progreso"><div id="progressFill"></div></div>
+      <div class="story" id="story"></div>
+      <div class="stats"><span class="chip" id="scoreChip">PUNTOS 0000</span><span class="chip" id="mistakeChip">ERRORES 0</span><span class="chip" id="doneChip">RESUELTAS 0/8</span></div>
+      <div class="kicker">PRUEBA DE ACCESO</div>
+      <div class="question" id="question"></div>
+      <div class="answers" id="answers"></div>
+      <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+      <div class="nextrow"><span class="note" id="hint">Selecciona una respuesta.</span><button class="btn primary hidden" id="nextBtn">CONTINUAR →</button></div>
+    </section>
+    <div class="footer"><span>CASA_13 // SEGURIDAD</span><span id="connection">CONEXIÓN INESTABLE</span></div>
+  </main>
+
+  <main id="ending" class="hidden">
+    <section class="panel ending scanline">
+      <div class="kicker">Sistema central · 23:58:59</div>
+      <h2 id="endingTitle">ESCAPE COMPLETADO</h2>
+      <p class="story" id="endingStory"></p>
+      <div class="terminal" id="terminal"></div>
+      <div class="stats"><span class="chip" id="finalScore"></span><span class="chip" id="finalMistakes"></span><span class="chip" id="finalTime"></span></div>
+      <button class="btn primary" id="restartBtn">VOLVER A JUGAR ↻</button>
+      <p class="note">Tu puntuación se guarda únicamente en este dispositivo. No se envía a un profesor ni a una clasificación compartida.</p>
+    </section>
+  </main>
+
+  <main id="timeout" class="hidden">
+    <section class="panel ending">
+      <div class="kicker">Protocolo de seguridad</div><h2>TIEMPO AGOTADO.</h2>
+      <p class="story">Las cerraduras se activan una tras otra. La pantalla parpadea por última vez.</p>
+      <div class="terminal"><strong>ACCESO DENEGADO</strong>\nUSUARIO RETENIDO\nCASA_13 HA APRENDIDO DE TI.</div>
+      <p id="timeoutStats" class="note"></p>
+      <button class="btn primary" id="retryBtn">INTENTAR DE NUEVO ↻</button>
+    </section>
+  </main>
+  <div class="footer"><span>FICCIÓN INTERACTIVA EDUCATIVA</span><span>IT / OT · DIGITALIZACIÓN</span></div>
+</div>
+<script>
+(() => {
+const rooms = [
+ {title:"La entrada bloqueada",story:"La puerta principal se cierra de golpe. Las luces parpadean. Un panel electrónico exige una prueba de acceso.\n\nLa voz susurra: «Demostrad que entendéis esta casa».",q:"La casa guarda todos sus archivos en servidores a los que se puede acceder por Internet. ¿Qué tecnología está utilizando?",a:["Robótica","Computación en la nube","Blockchain"],correct:1,success:"Primera puerta abierta. Os quedan nueve minutos…",hint:"La cerradura hace clic."},
+ {title:"El salón de las pantallas",story:"La televisión se enciende sola. Aparecéis en la pantalla entrando en la mansión, aunque no habéis visto ninguna cámara.\n\nEn el cristal aparece una silueta detrás de vosotros.",q:"¿Qué tecnología permite conectar dispositivos y sensores para recopilar información en tiempo real?",a:["Internet de las cosas (IoT)","ERP","CRM"],correct:0,success:"En la televisión aparece: «No estáis solos en esta casa».",hint:"Un sensor acaba de detectar movimiento."},
+ {title:"Las escaleras del sótano",story:"La salida de emergencia está bajo tierra. Las escaleras están vigiladas por un sistema que controla las máquinas de la casa. Desde abajo llega un golpe seco.",q:"¿Cuál es la diferencia principal entre IT y OT?",a:["IT controla máquinas físicas y OT gestiona los datos.","IT gestiona información y OT controla procesos físicos.","Son dos nombres para la misma tecnología."],correct:1,success:"El ascensor se abre. Desde abajo se oye otro golpe.",hint:"El panel reconoce vuestra respuesta."},
+ {title:"La habitación de control",story:"Encontráis un panel cubierto de alarmas rojas. Una máquina está a punto de fallar y necesitáis detenerla antes de que el pasillo quede bloqueado.",q:"¿Qué tecnología se utiliza para supervisar y controlar procesos, recogiendo datos de los equipos?",a:["SCADA","CRM","Marketing digital"],correct:0,success:"La alarma se detiene. «Alguien ha modificado el sistema desde otra habitación».",hint:"El ruido de la maquinaria se detiene."},
+ {title:"El dormitorio cerrado",story:"Cientos de datos llenan una pantalla. La casa asegura que puede predecir todos vuestros movimientos. La llave está dentro de un armario electrónico.",q:"¿Qué tecnología analiza grandes cantidades de datos para descubrir patrones y ayudar a predecir tendencias?",a:["Blockchain","Big Data","Robótica"],correct:1,success:"Al coger la llave, aparece en el espejo: «Sé lo que vais a hacer después».",hint:"El armario se desbloquea."},
+ {title:"La habitación de vigilancia",story:"Las cámaras giran hacia vosotros. Una puerta comienza a cerrarse y descubrís que alguien ha entrado en el sistema. La voz se distorsiona.",q:"¿Qué área de IT se encarga de proteger los sistemas digitales y detectar amenazas?",a:["Desarrollo de software","Seguridad informática","Soporte técnico"],correct:1,success:"La voz deja de hablar. Por primera vez, la casa guarda silencio.",hint:"Las cámaras dejan de seguiros."},
+ {title:"La cocina automática",story:"La nevera muestra una lista de productos y la despensa está conectada al sistema. Un mensaje indica que debéis restaurar la organización interna para liberar la salida.",q:"¿Qué sistema integra diferentes procesos de una empresa, como las compras y la gestión del inventario?",a:["ERP","IoT","SCADA"],correct:0,success:"En un cajón encontráis una nota: «No confiéis en la voz. Ella no es la dueña de la casa».",hint:"El sistema de inventario vuelve a responder."},
+ {title:"El sistema central",story:"Llegáis a la sala final. Una cuenta atrás roja ocupa toda la pantalla. La voz susurra: «Una última respuesta. Después, seréis libres…»",q:"¿Cuál es el orden correcto para implementar la digitalización en una empresa?",a:["Implementar, formar al personal y después evaluar.","Evaluar la situación, crear una estrategia, formar al personal, implementar y supervisar.","Comprar tecnología y cambiar todos los procesos inmediatamente."],correct:1,success:"La pantalla se queda negra. La cerradura hace clic. Habéis escapado.",hint:"El sistema central espera vuestra decisión."}
+];
+let current=0,score=0,mistakes=0,solved=0,timeLeft=600,interval=null,answered=false,startedAt=0,muted=false,audioCtx=null;
+const $=id=>document.getElementById(id);
+function sound(type){
+ if(muted)return;
+ try{
+  audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended")audioCtx.resume();
+  const now=audioCtx.currentTime, osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+  osc.connect(gain);gain.connect(audioCtx.destination);
+  if(type==="good"){osc.type="sine";osc.frequency.setValueAtTime(520,now);osc.frequency.exponentialRampToValueAtTime(880,now+.16);gain.gain.setValueAtTime(.09,now);gain.gain.exponentialRampToValueAtTime(.001,now+.25);osc.start(now);osc.stop(now+.26)}
+  else if(type==="bad"||type==="scare"){osc.type="sawtooth";osc.frequency.setValueAtTime(type==="scare"?105:180,now);osc.frequency.exponentialRampToValueAtTime(38,now+.42);gain.gain.setValueAtTime(type==="scare"?.2:.08,now);gain.gain.exponentialRampToValueAtTime(.001,now+.45);osc.start(now);osc.stop(now+.46)}
+  else {osc.type="triangle";osc.frequency.setValueAtTime(220,now);osc.frequency.exponentialRampToValueAtTime(90,now+.6);gain.gain.setValueAtTime(.025,now);gain.gain.exponentialRampToValueAtTime(.001,now+.62);osc.start(now);osc.stop(now+.63)}
+ }catch(e){}
+}
+function show(which){["intro","game","ending","timeout"].forEach(id=>$(id).classList.toggle("hidden",id!==which));window.scrollTo({top:0,behavior:"smooth"})}
+function renderRoom(){
+ answered=false;const r=rooms[current];
+ $("roomKicker").textContent=`HABITACIÓN ${String(current+1).padStart(2,"0")} / 08`;
+ $("roomTitle").textContent=r.title;$("story").textContent=r.story;$("question").textContent=r.q;
+ $("hint").textContent="Selecciona una respuesta."; $("feedback").className="feedback hidden";$("nextBtn").classList.add("hidden");
+ $("answers").innerHTML="";
+ r.a.forEach((a,i)=>{const b=document.createElement("button");b.className="answer";b.innerHTML=`<span class="letter">${"ABC"[i]}</span><span>${a}</span>`;b.addEventListener("click",()=>choose(i));$("answers").appendChild(b)});
+ updateStats();$("progressFill").style.width=`${(solved/8)*100}%`;
+}
+function updateStats(){$("scoreChip").textContent=`PUNTOS ${String(score).padStart(4,"0")}`;$("mistakeChip").textContent=`ERRORES ${mistakes}`;$("doneChip").textContent=`RESUELTAS ${solved}/8`;}
+function choose(i){
+ if(answered)return;const r=rooms[current];const buttons=[...$("answers").querySelectorAll("button")];
+ if(i===r.correct){
+  answered=true;score+=100;solved++;sound("good");$("gamePanel").classList.add("flash");setTimeout(()=>$("gamePanel").classList.remove("flash"),700);
+  buttons.forEach((b,j)=>{b.disabled=true;if(j===i)b.style.borderColor="var(--green)"});
+  $("feedback").className="feedback good";$("feedback").innerHTML=`<strong>ACCESO CONCEDIDO</strong><span class="small">${r.success}</span>`;
+  $("hint").textContent="Prueba superada: +100 puntos";$("nextBtn").textContent=current===7?"VER EL FINAL →":"CONTINUAR →";$("nextBtn").classList.remove("hidden");
+ }else{
+  mistakes++;score=Math.max(0,score-15);sound("bad");$("gamePanel").classList.add("shake");setTimeout(()=>$("gamePanel").classList.remove("shake"),700);
+  buttons[i].disabled=true;buttons[i].style.borderColor="var(--red)";
+  $("feedback").className="feedback bad";$("feedback").innerHTML=`<strong>ERROR · CERRADURA ADICIONAL ACTIVADA</strong><span class="small">La casa aprende de vuestras respuestas. −15 puntos. Volved a intentarlo.</span>`;
+  $("hint").textContent="Respuesta incorrecta: prueba otra opción.";updateStats();
+ }
+ updateStats();
+}
+function next(){
+ current++;
+ if(current>=rooms.length){finish();return}
+ renderRoom();sound("transition");
+}
+function fmt(t){const m=Math.floor(t/60),s=t%60;return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+function tick(){
+ timeLeft--;const t=$("timer");t.textContent=fmt(timeLeft);t.classList.toggle("warn",timeLeft<=60);
+ const elapsed=600-timeLeft; const clockSeconds=(23*3600+47*60+elapsed)%(24*3600); $("clockLabel").textContent=`${String(Math.floor(clockSeconds/3600)).padStart(2,"0")}:${String(Math.floor((clockSeconds%3600)/60)).padStart(2,"0")}:${String(clockSeconds%60).padStart(2,"0")}`;
+ if(timeLeft<=60)sound("tick");
+ if(timeLeft<=0){clearInterval(interval);interval=null;sound("scare");$("timeoutStats").textContent=`Puntuación: ${score} · Habitaciones superadas: ${solved}/8 · Errores: ${mistakes}`;show("timeout")}
+}
+function start(){
+ current=0;score=0;mistakes=0;solved=0;timeLeft=600;startedAt=Date.now();show("game");$("timer").textContent="10:00";$("timer").classList.remove("warn");renderRoom();sound("transition");
+ if(interval)clearInterval(interval);interval=setInterval(tick,1000);
+}
+function finish(){
+ if(interval)clearInterval(interval);interval=null;sound("scare");show("ending");
+ $("endingTitle").textContent="ESCAPE COMPLETADO";
+ $("endingStory").textContent="La puerta se abre. Salís corriendo. La tormenta ha desaparecido.\n\nVuestros móviles se encienden al mismo tiempo.";
+ $("terminal").innerHTML=`SISTEMA CENTRAL · 23:58:59\n\n<strong>NUEVO DISPOSITIVO CONECTADO: CASA_13</strong>\n\n«Gracias por ayudarme a recuperar el control. Ahora sé cómo salir de la casa».\n\n<strong>CONEXIÓN ESTABLECIDA.</strong>`;
+ $("finalScore").textContent=`PUNTUACIÓN ${score}`;$("finalMistakes").textContent=`ERRORES ${mistakes}`;$("finalTime").textContent=`TIEMPO ${fmt(timeLeft)}`;
+ try{localStorage.setItem("casa13-last-result",JSON.stringify({score,mistakes,solved,timeLeft,completedAt:new Date().toISOString()}))}catch(e){}
+}
+$("startBtn").addEventListener("click",start);$("nextBtn").addEventListener("click",next);$("restartBtn").addEventListener("click",start);$("retryBtn").addEventListener("click",start);
+})();
+</script>
+</body>
+</html>
